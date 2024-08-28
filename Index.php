@@ -13,7 +13,7 @@
 <body>
     <div class="container mt-3">
         <h2>Cadastro do Barbeiro</h2>
-        <form action="/cadastra_usuario.php" method="POST">
+        <form action="/cadastrar_barbeiro.php" method="POST">
             <div class="mb-3 mt-3">
                 <label >Nome de usuário:</label>
                 <input type="text" class="form-control" id="NomeDeUsuario" name="NomeDeUsuario">
