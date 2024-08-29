@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SrVeríssimo</title>
+</head>
+
+<body>
+    <h1>Calculo da Área do Retângulo</h1>
+    <h3>Altura:</h3>
+    <input id="Valor1" type="text">
+    <h3>Base:</h3>
+    <input id="Valor2" type="text">
+    <p>
+        <button id="Calculo">Calcular</button>
+    <p>
+    <h3>Resultado:</h3>
+    <input id="Resultado" disabled="true">
+
+    <script>
+        const Calculo = document.getElementById('Calculo')
+        Calculo.addEventListener("click", function Somar(string) {
+            const valor1 = document.getElementById("Valor1").value
+            const valor1INT = parseInt(valor1)
+
+            const valor2 = document.getElementById("Valor2").value
+            const valor2INT = parseInt(valor2)
+
+            string = Calculo
+            const Multiplicar = valor1INT * valor2INT
+            document.getElementById("Resultado").value = Multiplicar
+        })
+    </script>
+</body>
+
+</html>

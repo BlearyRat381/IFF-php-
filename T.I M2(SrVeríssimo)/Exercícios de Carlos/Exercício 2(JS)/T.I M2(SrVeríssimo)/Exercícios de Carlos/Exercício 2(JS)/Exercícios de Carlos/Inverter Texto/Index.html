@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SrVeríssimo</title>
+
+
+    <style>
+        .texto {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="color: red;text-align: center;">Formulário para texto invertido</h1>
+    <form name="Conversor">
+        <h3 class="texto">Digite o seu texto</h3>
+        <input type="text" placeholder="Digite aqui" id="texto">
+        <p><br>
+            <button id="send">Converter</button>
+        <h3 class="texto">Resultado</h3>
+        <input id="resultado">
+    </form>
+
+    <script>
+        const valor = document.getElementById('send')
+
+        valor.addEventListener('click', function inverter(string) {
+            const name = document.getElementById('texto').value
+            string = name
+            const stringReverse = string.split('').reverse().join('')
+
+            document.getElementById('resultado').value = stringReverse
+        })
+    </script>
+</body>
+
+</html>

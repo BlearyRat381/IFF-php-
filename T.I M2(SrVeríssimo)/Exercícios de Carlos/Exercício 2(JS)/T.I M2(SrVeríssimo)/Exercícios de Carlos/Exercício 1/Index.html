@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SrVeríssimo</title>
+</head>
+<body style="text-align: center; font-family: Arial, Helvetica, sans-serif;">
+    <h3>Sucessor e antecessor</h3>
+    <input type="text" id="entrada"><br><br>
+    <button id="mostrar">Mostrar</button><br><br>
+
+    <label>Sucessor:</label><input type="text" id="sucessor" disabled="true"><br><br>
+    <label>Antecessor:</label><input type="text" id="antecessor" disabled="true">
+
+    <script>
+        const Mostrar = document.getElementById('mostrar')
+        Mostrar.addEventListener("click", function Resultado(string) {
+            const valor1 = document.getElementById("entrada").value
+            const valor1INT = parseInt(valor1)
+
+            string = Mostrar
+
+            const sucessor = valor1INT +1
+            const antecessor = valor1INT -1
+            document.getElementById("sucessor").value = sucessor
+            document.getElementById("antecessor").value = antecessor
+        })
+    </script>
+</body>
+</html>
