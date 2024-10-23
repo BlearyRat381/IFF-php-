@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/10/2024 às 15:35
+-- Tempo de geração: 23/10/2024 às 16:40
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -75,7 +75,9 @@ INSERT INTO `dados_bancarios` (`id_dados_bancarios`, `chave_pix`, `numero_da_con
 (2, '2198554563325', '46546433', '000', 'Nubank', 0),
 (3, '21967377400', '264688', '009', '341', 0),
 (4, '21967377400', '264688', '009', '341', 0),
-(7, '21967377400', '21312312', '1', '1', 0);
+(7, '21967377400', '21312312', '1', '1', 0),
+(8, '2198554563325', '21312312', '212', '212', 0),
+(9, '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +159,9 @@ INSERT INTO `usuario` (`id_usuario`, `nome`, `data_de_nascimento`, `data_criacao
 (2, 'Carlos Daniel', '2024-10-04', '2024-10-23 01:44:00', 'carlos@gmail.com', '12345', 1),
 (3, 'Vitor Rangel', '2009-06-22', '2024-10-23 02:32:33', 'vitinho@gmail.com', '12345', 1),
 (4, 'Vitor Rangel', '2009-06-22', '2024-10-23 02:33:53', 'vitinho@gmail.com', '12345', 1),
-(7, 'Pablo', '2024-11-03', '2024-10-23 09:52:55', 'pablo@gmail.com', '456789', 2);
+(7, 'Pablo', '2024-11-03', '2024-10-23 09:52:55', 'pablo@gmail.com', '456789', 2),
+(8, 'Bleary', '2024-10-02', '2024-10-23 11:25:28', 'blearyrat381@gmail.com', '12345', 1),
+(9, '', '0000-00-00', '2024-10-23 11:34:20', '', '', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -219,7 +223,7 @@ ALTER TABLE `agendamentos`
 -- AUTO_INCREMENT de tabela `dados_bancarios`
 --
 ALTER TABLE `dados_bancarios`
-  MODIFY `id_dados_bancarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_dados_bancarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `serviços`
@@ -231,7 +235,7 @@ ALTER TABLE `serviços`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

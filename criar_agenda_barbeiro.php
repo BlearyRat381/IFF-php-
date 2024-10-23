@@ -1,3 +1,7 @@
+<?php
+include "connection.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +19,18 @@
         <h2>Cadastro da Agenda do Barbeiro</h2>
         <form action="/action_page.php">
             <div class="mb-3 mt-3">
-                <label class="form-check-label">
-                    Barbeiro
-                </label>
+                <label class="form-check-label">Barbeiro</label>
                 <select class="form-select">
                     <option>Selecione um barbeiro</option>
+
+                    <?php
+                $sql = 'select * from usuario where id_grupo = 1'; // 1 é o barbeiro hem! 2  é o Cliente
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                echo "<option>".$row['nome']."</option>";
+               }}
+                    ?>
 
                 </select>
             </div>
@@ -71,3 +82,7 @@
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>
