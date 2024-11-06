@@ -6,13 +6,13 @@ class Util {
     public static $password ="";
     public static $dbname ="barbearia";
 
-    ->public static function con(){
+    public static function con(){
         $conn= new mysql(
             self::$servername,
             self::$username,
             self::$password,
-            self::$dbname;
-        )
+            self::$dbname,
+        );
         if($conn->connect_error)
          die("conexão não estabelecida");
         return $conn;
