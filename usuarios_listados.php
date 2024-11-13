@@ -32,18 +32,18 @@ include "connection.php";
                     </thead>
                     <tbody>
                         <?php
-                        $sql = 'select * from usuarios';
+                        $sql = 'select * from usuario left join dados_bancarios on usuario.id_usuario = dados_bancarios.id_usuario';
                         $result = $conn->query($sql);
                     
                             if ($result->num_rows > 0) {
                                 // output data of each row
                                 while($row = $result->fetch_assoc()) {
-                                echo "<tr><td>".$row['id']."</td><td>"
-                                .$row['nome_usuario']."</td><td>"
+                                echo "<tr><td>".$row['id_usuario']."</td><td>"
+                                .$row['nome']."</td><td>"
                                 .$row['data_de_nascimento']."</td><td>"
-                                .$row['nome_banco']."</td><td>"
-                                .$row['numero_agencia']."</td><td>"
-                                .$row['numero_conta']."</td><td>"
+                                .$row['nome_do_banco']."</td><td>"
+                                .$row['numero_da_agencia']."</td><td>"
+                                .$row['numero_da_conta']."</td><td>"
                                 .$row['chave_pix']."</td><td>"
                                 .$row['email']."</td><td>"
                                 .$row['senha']."</td><td>"
@@ -57,3 +57,7 @@ include "connection.php";
     
                 </body>
                 </html>
+
+                <?php
+                $conn->close()
+                ?>

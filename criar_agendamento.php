@@ -1,69 +1,44 @@
+
 <?php
-// Conexão com o banco de dados
-include "connection.php";
+include "../connection.php";
 
-// Verifica se a chave 'data' foi enviada via POST
-if (isset($_POST['data']) && !empty($_POST['data'])) {
-    $data_agendamento = $_POST['data'];
-    $dayofweek = date('w', strtotime($data_agendamento));
-} else {
-    echo "Data não informada!";
-    exit;  // Sai do script caso a data não seja informada
-}
-
-// Lista de dias da semana
 $dias_da_semana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
-// Verifica se a tabela 'agenda' existe
-$sql_check_table = "SHOW TABLES LIKE 'agenda'";
-$table_check_result = $conn->query($sql_check_table);
+$dayofweek = date('w', strtotime($_POST['data']));
+$data_agendamento = $_POST['data'];
 
-// Se a tabela 'agenda' não existir
-if ($table_check_result->num_rows == 0) {
-    echo "A tabela 'agenda' não existe no banco de dados.";
-    exit;  // Interrompe o script se a tabela não existir
-}
+// echo "<br><br><br><br>dias_da_semana da semana agendamento: " . $dayofweek;
 
-// Verifica se a tabela 'usuarios' existe
-$sql_check_usuarios = "SHOW TABLES LIKE 'usuario'";
-$usuarios_check_result = $conn->query($sql_check_usuarios);
-
-// Se a tabela 'usuarios' não existir
-if ($usuarios_check_result->num_rows == 0) {
-    echo "A tabela 'usuario' não existe no banco de dados.";
-    exit;  // Interrompe o script se a tabela não existir
-}
-
-// Consulta para verificar os horários disponíveis
-$sql = "
-    SELECT nome, agenda.dia, agenda.horario 
-    FROM agenda 
-    INNER JOIN usuario ON usuario.id_usuario = agenda.id_usuario
-    WHERE agenda.id_agenda NOT IN (
-        SELECT agenda.id_agenda 
-        FROM agenda 
-        INNER JOIN agendamentos ON agendamentos.id_agenda = agenda.id_agenda
-        INNER JOIN usuario ON usuario.id_usuario = agenda.id_usuario 
-        WHERE agendamentos.data = '$data_agendamento' AND agenda.dia = $dayofweek
-    )
-    AND agenda.dia = $dayofweek
+$sql = "SELECT * FROM agenda inner join usuario on usuario.id_usuario = agenda.id_usuario 
+where dias_da_semana = $dayofweek
 ";
 
-// Executa a consulta
-$result = $conn->query($sql); 
+$sql = "
+select nome, agenda.dias_da_semana, agenda.horario from agenda
+INNER join usuario on usuario.id_usuario = agenda.id_usuario
+where agenda.id_agenda not in (SELECT agenda.id_agenda FROM `agenda` inner join agendamentos on agendamentos.id_agenda = agenda.id_agenda
+inner join usuario on usuario.id_usuario = agenda.id_usuario where agendamentos.data = '$data_agendamento' and agenda.dias_da_semana = $dayofweek)
+and dias_da_semana = $dayofweek
+";
+$result = $conn->query($sql);
 
-// Verifique se ocorreu algum erro na consulta SQL
-if (!$result) {
-    echo "Erro na consulta: " . $conn->error;
-    exit;
-}
+// echo "<pre>";
+// print_r([
+//     'agendamento' => $_POST,
+//     'result' => $result,
+// ]);
+
+// SELECT * FROM `agenda` inner join agendamentos on agendamentos.id_agenda = agenda.id_agenda
+// inner join usuario on usuario.id_usuario = agenda.id_usuario
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Agendamentos Disponíveis</title>
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +46,7 @@ if (!$result) {
 </head>
 <body>
 
-    <!-- Barra de navegação -->
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
             <ul class="navbar-nav">
@@ -91,40 +66,37 @@ if (!$result) {
         </div>
     </nav>
 
-    <!-- Conteúdo da página -->
-    <div class="container mt-3">
-        <h2>Agendamentos disponíveis para o dia: <?php echo $_POST['data']; ?></h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Barbeiro</th>
-                    <th>Dia da Semana</th>
-                    <th>Horário</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Verifica se existem agendamentos disponíveis
-                if ($result->num_rows > 0) {
-                    // Exibe os dados de cada linha
-                    while ($row = $result->fetch_assoc()) {
-                        echo "
-                            <tr>
-                                <td>".$row['nome']."</td>
-                                <td>".$dias_da_semana[$row['dia']]."</td>
-                                <td>".$row['horario']."</td>
-                                <td><button class='btn btn-primary'>Agendar</button></td>
-                            </tr>";
-                    }
-                } else {
-                    // Caso não existam agendamentos disponíveis
-                    echo "<tr><td colspan='4'>Nenhum horário disponível para o dia selecionado.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+<div class="container mt-3">
+  <h2>Lista de usuários</h2> 
+  <h2>Agendamentos disponíveis para o dia: <?php echo $_POST['data']; ?></h2>          
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Barbeiro</th>
+        <th>Dia da Semana</th>
+        <th>Horário</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      
+        if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+          echo "
+            <tr>
+                <td>".$row['nome']."</td>
+                <td>".$dias_da_semana[$row['dia_da_semana']]."</td>
+                <td>".$row['horario']."</td>
+                <td><button class='btn btn-primary'>Agendar</button></td>
+            </tr>";
+        }
+    }
+      ?>
+    </tbody>
+  </table>
+</div>
 
 </body>
 </html>

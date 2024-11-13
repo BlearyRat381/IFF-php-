@@ -1,5 +1,6 @@
 <?php
 include "connection.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -17,20 +18,21 @@ include "connection.php";
 
     <div class="container mt-3">
         <h2>Cadastro da Agenda do Barbeiro</h2>
-        <form action="/action_page.php">
+        <form action="criar_agenda.php" method="post">
             <div class="mb-3 mt-3">
                 <label class="form-check-label">Barbeiro</label>
-                <select class="form-select">
+                <select class="form-select" name ="id_usuario" id ="id_usuario" >
                     <option>Selecione um barbeiro</option>
 
-                    <?php
-                $sql = 'select * from usuario where id_grupo = 1'; // 1 é o barbeiro hem! 2  é o Cliente
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                echo "<option>".$row['nome']."</option>";
-               }}
-                    ?>
+                <?php
+                    $sql = 'select * from usuario where id_grupo = 1'; // 1 é o barbeiro hem! 2  é o Cliente
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        echo "<option value=".$row['id_usuario'].">".$row['nome']."</option>";
+                    }
+                    }
+                ?>
 
                 </select>
             </div>
@@ -39,7 +41,7 @@ include "connection.php";
                 <label class="form-check-label">
                     Dia da semana
                 </label>
-                <select class="form-select">
+                <select class="form-select" name ="dia" id = "dia">
                     <option>Selecione o dia da semana</option>
                     <option value="0">Domingo</option>
                     <option value="1">Segunda-feira</option>
@@ -84,5 +86,5 @@ include "connection.php";
 </html>
 
 <?php
-$conn->close();
+$conn->close()
 ?>
