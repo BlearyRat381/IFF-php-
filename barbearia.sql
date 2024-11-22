@@ -39,26 +39,26 @@ CREATE TABLE `agenda` (
 --
 
 INSERT INTO `agenda` (`id_agenda`, `dia`, `horario`, `id_usuario`) VALUES
-(19420, 2, '08:30:00', 4),
-(19419, 2, '08:00:00', 4),
-(19421, 2, '09:00:00', 4),
-(19422, 2, '09:30:00', 4),
-(19423, 2, '10:00:00', 4),
-(19424, 2, '10:30:00', 4),
-(19425, 2, '11:00:00', 4),
-(19426, 2, '11:30:00', 4),
-(19427, 2, '14:00:00', 4),
-(19428, 2, '14:30:00', 4),
-(19429, 2, '15:00:00', 4),
-(19430, 2, '15:30:00', 4),
-(19431, 2, '16:00:00', 4),
-(19432, 2, '16:30:00', 4),
-(19433, 2, '17:00:00', 4),
-(19434, 2, '17:30:00', 4),
-(19435, 2, '18:00:00', 4),
-(19436, 2, '18:30:00', 4),
-(19437, 2, '19:00:00', 4),
-(19438, 2, '19:30:00', 4);
+(1, 2, '08:30:00', 4),
+(2, 2, '08:00:00', 4),
+(3, 2, '09:00:00', 4),
+(4, 2, '09:30:00', 4),
+(5, 2, '10:00:00', 4),
+(6, 2, '10:30:00', 4),
+(7, 2, '11:00:00', 4),
+(8, 2, '11:30:00', 4),
+(9, 2, '14:00:00', 4),
+(10, 2, '14:30:00', 4),
+(11, 2, '15:00:00', 4),
+(12, 2, '15:30:00', 4),
+(13, 2, '16:00:00', 4),
+(14, 2, '16:30:00', 4),
+(15, 2, '17:00:00', 4),
+(16, 2, '17:30:00', 4),
+(17, 2, '18:00:00', 4),
+(18, 2, '18:30:00', 4),
+(19, 2, '19:00:00', 4),
+(20, 2, '19:30:00', 4);
 
 -- --------------------------------------------------------
 
@@ -236,7 +236,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19439;
+  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `agendamentos`
@@ -248,7 +248,7 @@ ALTER TABLE `agendamentos`
 -- AUTO_INCREMENT de tabela `dados_bancarios`
 --
 ALTER TABLE `dados_bancarios`
-  MODIFY `id_dados_bancarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_dados_bancarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `serviços`
@@ -260,7 +260,7 @@ ALTER TABLE `serviços`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
