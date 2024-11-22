@@ -4,7 +4,7 @@ include "conexao.php";
 
 $dias_da_semana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
-$data_agendamento = $_POST['data'];
+$data_agendamento = $_POST['dia'];
 $servico = $_POST['servico'];
 $sql = "
 SELECT 

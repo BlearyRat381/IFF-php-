@@ -8,14 +8,14 @@ echo "<pre>";
 $parts = parse_url($_SERVER['REQUEST_URI']);
 parse_str($parts['query'], $query);
 $id_agenda = $query['id_agenda'];
-$data = $query['data'];
+$dia = $query['dia'];
 $id_usuario = $query['id_usuario'];
 $servico = $query['id_servico'];
 $sql_agendamento = "
     INSERT INTO agendamentos 
-    (id_usuario, id_agenda, data, id_servico)
+    (id_usuario, id_agenda, dia, id_servico)
     VALUES
-    ($id_usuario, $id_agenda, '$data', $servico)
+    ($id_usuario, $id_agenda, '$dia', $servico)
 ";
 
 
