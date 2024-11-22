@@ -4,21 +4,21 @@ include "conexao.php";
 
 $dias_da_semana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
-$data_agendamento = $_POST['dia'];
+$data_agendamento = $_POST['data'];
 $servico = $_POST['servico'];
 $sql = "
 SELECT 
-abc.nome, agenda.dia_da_semana, agenda.horario_inicio, agenda.id_agenda, abc.id_usuario 
+abc.nome, agenda.dia, agenda.horario, agenda.id_agenda, abc.id_usuario 
 FROM agenda
 INNER JOIN abc ON abc.id_usuario = agenda.id_usuario
-WHERE agenda.dia_da_semana = $dayofweek
+WHERE agenda.dia = $dayofweek
 AND agenda.id_agenda NOT IN (
     SELECT agenda.id_agenda 
     FROM agendamentos 
     INNER JOIN agenda ON agendamentos.id_agenda = agenda.id_agenda
     WHERE agendamentos.data = '$data_agendamento'
 )
-ORDER BY agenda.horario_inicio
+ORDER BY agenda.horario
 
 ";
 
@@ -38,18 +38,18 @@ $result = $conn->query($sql);
 <body>
 
 <div class="container mt-3">
-    <h2>Lista de Agendamentos Disponíveis para o dia: <?php echo $data_agendamento; ?></h2>
+    <h2>Agendamentos Disponíveis para o dia: <?php echo $data_agendamento; ?></h2>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Barbeiro</th>
                 <th>Dia da Semana</th>
                 <th>Horário</th>
-                <th>Ações</th>
+                <th>serviço</th>
             </tr>
         </thead>
         <tbody>
-            <?php
+            <?php   
             if ($result->num_rows > 0) {
                
                 while ($row = $result->fetch_assoc()) {
