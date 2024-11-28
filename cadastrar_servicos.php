@@ -1,19 +1,18 @@
 <?php
 include "connection.php";
 
-$servico = $_POST['servico'];
+$nome = $_POST['nome'];
 $valor = $_POST['valor'];
 
-$sql = "INSERT INTO servicos (servico, valor)
-VALUES ('$servico', '$valor')";
+$sql_servicos = "INSERT INTO servicos (nome, valor)
+VALUES ('$nome', '$valor')";
 
-if (mysqli_query($conn, $sql)) {
+if ($conn->query($sql_servicos) === TRUE) {
     echo "Novo Serviço incluído com sucesso";
 } else {
-    echo "Error: ". $sql. "<br>". mysqli_error($conn);
+    echo "Error: ". $sql_servicos. "<br>". mysqli_error($conn);
 }
 
-$sql = 'select * from servicos';
-  $result = $conn->query($sql);
+$conn->close();
 
 ?>

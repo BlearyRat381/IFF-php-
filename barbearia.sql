@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Nov-2024 às 21:57
+-- Tempo de geração: 28/11/2024 às 17:25
 -- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `barbearia1`
+-- Banco de dados: `barbearia`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `agenda`
+-- Estrutura para tabela `agenda`
 --
 
 CREATE TABLE `agenda` (
@@ -35,7 +35,7 @@ CREATE TABLE `agenda` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `agenda`
+-- Despejando dados para a tabela `agenda`
 --
 
 INSERT INTO `agenda` (`id_agenda`, `dia`, `horario`, `id_usuario`) VALUES
@@ -58,12 +58,32 @@ INSERT INTO `agenda` (`id_agenda`, `dia`, `horario`, `id_usuario`) VALUES
 (17, 2, '18:00:00', 4),
 (18, 2, '18:30:00', 4),
 (19, 2, '19:00:00', 4),
-(20, 2, '19:30:00', 4);
+(20, 2, '19:30:00', 4),
+(21, 5, '08:00:00', 2),
+(22, 5, '08:30:00', 2),
+(23, 5, '09:00:00', 2),
+(24, 5, '09:30:00', 2),
+(25, 5, '10:00:00', 2),
+(26, 5, '10:30:00', 2),
+(27, 5, '11:00:00', 2),
+(28, 5, '11:30:00', 2),
+(29, 5, '14:00:00', 2),
+(30, 5, '14:30:00', 2),
+(31, 5, '15:00:00', 2),
+(32, 5, '15:30:00', 2),
+(33, 5, '16:00:00', 2),
+(34, 5, '16:30:00', 2),
+(35, 5, '17:00:00', 2),
+(36, 5, '17:30:00', 2),
+(37, 5, '18:00:00', 2),
+(38, 5, '18:30:00', 2),
+(39, 5, '19:00:00', 2),
+(40, 5, '19:30:00', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `agendamentos`
+-- Estrutura para tabela `agendamentos`
 --
 
 CREATE TABLE `agendamentos` (
@@ -76,7 +96,7 @@ CREATE TABLE `agendamentos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `dados_bancarios`
+-- Estrutura para tabela `dados_bancarios`
 --
 
 CREATE TABLE `dados_bancarios` (
@@ -89,7 +109,7 @@ CREATE TABLE `dados_bancarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `dados_bancarios`
+-- Despejando dados para a tabela `dados_bancarios`
 --
 
 INSERT INTO `dados_bancarios` (`id_dados_bancarios`, `chave_pix`, `numero_da_conta`, `numero_da_agencia`, `nome_do_banco`, `id_usuario`) VALUES
@@ -108,7 +128,7 @@ INSERT INTO `dados_bancarios` (`id_dados_bancarios`, `chave_pix`, `numero_da_con
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `grupos`
+-- Estrutura para tabela `grupos`
 --
 
 CREATE TABLE `grupos` (
@@ -117,7 +137,7 @@ CREATE TABLE `grupos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `grupos`
+-- Despejando dados para a tabela `grupos`
 --
 
 INSERT INTO `grupos` (`id_grupo`, `nome`) VALUES
@@ -127,20 +147,26 @@ INSERT INTO `grupos` (`id_grupo`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `serviços`
+-- Estrutura para tabela `servicos`
 --
 
-CREATE TABLE `serviços` (
+CREATE TABLE `servicos` (
   `id_servico` int(11) NOT NULL,
   `nome` varchar(128) NOT NULL,
-  `valor` int(11) NOT NULL,
-  `id_tipo` int(11) NOT NULL
+  `valor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `servicos`
+--
+
+INSERT INTO `servicos` (`id_servico`, `nome`, `valor`) VALUES
+(1, 'Corte de barba', 25);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `telefones`
+-- Estrutura para tabela `telefones`
 --
 
 CREATE TABLE `telefones` (
@@ -152,18 +178,7 @@ CREATE TABLE `telefones` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipo_servico`
---
-
-CREATE TABLE `tipo_servico` (
-  `id_tipo` int(11) NOT NULL,
-  `tipo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario`
+-- Estrutura para tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -177,7 +192,7 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome`, `data_de_nascimento`, `data_criacao`, `email`, `senha`, `id_grupo`) VALUES
@@ -188,55 +203,56 @@ INSERT INTO `usuario` (`id_usuario`, `nome`, `data_de_nascimento`, `data_criacao
 (5, 'Pablo Bastos', '2024-11-03', '2024-10-23 09:52:55', 'pablo@gmail.com', '456789', 2),
 (6, 'Bleary', '2024-10-02', '2024-10-23 11:25:28', 'blearyrat381@gmail.com', '12345', 1),
 (7, 'Nathan Bezerra', '2006-09-10', '2024-10-23 11:34:20', 'nathan_gamer@gmail.com', '12345', 2);
+
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `agenda`
+-- Índices de tabela `agenda`
 --
 ALTER TABLE `agenda`
   ADD PRIMARY KEY (`id_agenda`);
 
 --
--- Índices para tabela `agendamentos`
+-- Índices de tabela `agendamentos`
 --
 ALTER TABLE `agendamentos`
   ADD PRIMARY KEY (`id_agendamento`);
 
 --
--- Índices para tabela `dados_bancarios`
+-- Índices de tabela `dados_bancarios`
 --
 ALTER TABLE `dados_bancarios`
   ADD PRIMARY KEY (`id_dados_bancarios`);
 
 --
--- Índices para tabela `grupos`
+-- Índices de tabela `grupos`
 --
 ALTER TABLE `grupos`
   ADD PRIMARY KEY (`id_grupo`);
 
 --
--- Índices para tabela `serviços`
+-- Índices de tabela `servicos`
 --
-ALTER TABLE `serviços`
+ALTER TABLE `servicos`
   ADD PRIMARY KEY (`id_servico`);
 
 --
--- Índices para tabela `usuario`
+-- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `agendamentos`
@@ -251,10 +267,10 @@ ALTER TABLE `dados_bancarios`
   MODIFY `id_dados_bancarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de tabela `serviços`
+-- AUTO_INCREMENT de tabela `servicos`
 --
-ALTER TABLE `serviços`
-  MODIFY `id_servico` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `servicos`
+  MODIFY `id_servico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
