@@ -1,11 +1,5 @@
 <?php
 include "connection.php";
-
-echo "<pre>";
-
-print_r($_POST);
-
-
 $nome = $_POST['nome'];
 $data_de_nascimento = $_POST['data_de_nascimento'];
 $email = $_POST['email'];

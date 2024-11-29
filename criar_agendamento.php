@@ -1,80 +1,41 @@
 <?php
 include "connection.php";
 
-
 $dias_da_semana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+$data_agendamento = isset($_POST['data']) ? $_POST['data'] : null;
+$servico = isset($_POST['servico']) ? $_POST['servico'] : null;
 
-$data_agendamento = $_POST['data'];
-$servico = $_POST['servico'];
+$dayofweek = date('w', strtotime($data_agendamento));
+$dia_da_semana = $dias_da_semana[$dayofweek];
 $sql = "
 SELECT 
-abc.nome, agenda.dia, agenda.horario, agenda.id_agenda, abc.id_usuario 
+    usuario.nome, agenda.dia, agenda.horario AS horario_inicio, agenda.id_agenda, usuario.id_usuario 
 FROM agenda
-INNER JOIN abc ON abc.id_usuario = agenda.id_usuario
-WHERE agenda.dia = $dayofweek
+INNER JOIN usuario ON usuario.id_usuario = agenda.id_usuario
+WHERE agenda.dia = '$dia_da_semana'
 AND agenda.id_agenda NOT IN (
     SELECT agenda.id_agenda 
     FROM agendamentos 
     INNER JOIN agenda ON agendamentos.id_agenda = agenda.id_agenda
     WHERE agendamentos.data = '$data_agendamento'
 )
-ORDER BY agenda.horario
-
+ORDER BY agenda.horario;
 ";
-
-
 $result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {
+echo "
+<tr>
+    <td>".$row['nome']."</td>
+     <td>".$row['dia']."</td>
+     <td>".$row['horario_inicio']."</td>
+     <td>
+        <a href='insert_agendamento.php?id_agenda=".$row['id_agenda']."&data=".$data_agendamento."&id_usuario=".$row['id_usuario']."&id_servico=".$servico."' class='btn btn-primary'>Agendar</a>
+     </td>
+ </tr>
+ ";
+    }
+} else {
+echo "<tr><td colspan='4'>Não há agendamentos disponíveis para essa data.</td></tr>";
+}
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Agendamentos Disponíveis</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-
-<div class="container mt-3">
-    <h2>Agendamentos Disponíveis para o dia: <?php echo $data_agendamento; ?></h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Barbeiro</th>
-                <th>Dia da Semana</th>
-                <th>Horário</th>
-                <th>serviço</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php   
-            if ($result->num_rows > 0) {
-               
-                while ($row = $result->fetch_assoc()) {
-            
-                    echo "
-                    <tr>
-                            <td>".$row['nome']."</td>
-                            <td>".$dias_da_semana[$row['dia_da_semana']]."</td>
-                            <td>".$row['horario_inicio']."</td>
-                            <td>
-                                <input type='hidden' name='id_usuario' value='".$row['id_usuario']."'>
-                                <input type='hidden' name='id_agenda' value='".$row['id_agenda']."'>
-                                <input type='hidden' name='data' value='$data_agendamento'>
-                                <a  href='insert_agendamento.php?id_agenda=".$row['id_agenda']."&data=".$data_agendamento."&id_usuario=".$row['id_usuario']."&id_servico=".$servico."'  ><button type='submit' class='btn btn-primary'>Agendar</button></a>
-                            </td>
-                    </tr>
-                    ";
-                }
-            } else {
-                echo "<tr><td colspan='4'>Não há agendamentos disponíveis para essa data.</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
-
-</body>
-</html>

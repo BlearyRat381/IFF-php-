@@ -27,12 +27,13 @@ SET time_zone = "+00:00";
 -- Estrutura para tabela `agenda`
 --
 
-CREATE TABLE `agenda` (
-  `id_agenda` int(11) NOT NULL,
-  `dia` int(11) NOT NULL,
-  `horario` time NOT NULL,
-  `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE agenda (
+    id_agenda INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    dia VARCHAR(20) NOT NULL,
+    horario TIME NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
 
 --
 -- Despejando dados para a tabela `agenda`
