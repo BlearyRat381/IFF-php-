@@ -1175,18 +1175,12 @@ const numeroDaAgencia = document.getElementById('numero_da_agencia');
 function PreencherSelect(bancos) {
     bancos.forEach(banco => {
         const option = document.createElement('option');
-        option.value = banco.code; 
+        option.value = banco.bank; 
         option.textContent = banco.bank; 
         nomeDoBanco.appendChild(option);
     });
 }
 
-nomeDoBanco.addEventListener('change', function() {
-    const bancoSelecionado = nomeDoBanco.options[nomeDoBanco.selectedIndex].text; 
-    const codigoDoBanco = nomeDoBanco.value;  
 
- 
-    numeroDaAgencia.value = codigoDoBanco;
-});
 
 PreencherSelect(bancos);
